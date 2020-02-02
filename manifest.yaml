@@ -1,0 +1,35 @@
+app:
+  # Namespace, default to 'zalopay'
+  namespace: std
+  # Names will be validated with IAM token to check if match
+  name: zas
+  version: 0.1.0
+  description: ZaloPay Accounting System
+  url: https://github.com/zalopay-oss
+  maintainer: anhld2@vng.com.vn
+  labels:
+    - key=value
+    - region=us
+  dependencies:
+    # Declare dependencies using NPM or Rust style:
+    # - https://docs.npmjs.com/files/package.json#dependencies
+    # - https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
+    - std/auth:~0.1.0
+    - std/kv:~0.2.1
+  deployment:
+    - host: 0.0.0.0
+    - port: 9630
+
+settings:
+  broker:
+    bootstrap.servers: 10.0.0.1:9630
+    acks: all
+    buffer.memory: 33554432
+    compression.type: snappy
+
+  # Use proto3 style guide
+  # Reference: https://developers.google.com/protocol-buffers/docs/style
+  master_db:
+    host: 0.0.0.0
+    port: 3306
+    passwd: this-is-a-secret

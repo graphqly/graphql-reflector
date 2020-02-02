@@ -1,0 +1,160 @@
+package io.github.graphqly.reflector.execution;
+
+import graphql.GraphQLContext;
+import graphql.GraphQLException;
+import graphql.schema.DataFetchingEnvironment;
+import io.github.graphqly.reflector.generator.mapping.ArgumentInjector;
+import io.github.graphqly.reflector.generator.mapping.ConverterRegistry;
+import io.github.graphqly.reflector.generator.mapping.DelegatingOutputConverter;
+import io.github.graphqly.reflector.metadata.Operation;
+import io.github.graphqly.reflector.metadata.OperationArgument;
+import io.github.graphqly.reflector.metadata.Resolver;
+import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
+import io.github.graphqly.reflector.util.Utils;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static io.github.graphqly.reflector.util.GraphQLUtils.CLIENT_MUTATION_ID;
+
+/** Created by bojan.tomic on 1/29/17. */
+public class OperationExecutor {
+
+  private final Operation operation;
+  private final ValueMapper valueMapper;
+  private final GlobalEnvironment globalEnvironment;
+  private final ConverterRegistry converterRegistry;
+  private final DerivedTypeRegistry derivedTypes;
+  private final Map<Resolver, List<ResolverInterceptor>> interceptors;
+
+  public OperationExecutor(
+      Operation operation,
+      ValueMapper valueMapper,
+      GlobalEnvironment globalEnvironment,
+      ResolverInterceptorFactory interceptorFactory) {
+    this.operation = operation;
+    this.valueMapper = valueMapper;
+    this.globalEnvironment = globalEnvironment;
+    this.converterRegistry =
+        optimizeConverters(operation.getResolvers(), globalEnvironment.converters);
+    this.derivedTypes = deriveTypes(operation.getResolvers(), converterRegistry);
+    this.interceptors =
+        operation.getResolvers().stream()
+            .collect(
+                Collectors.toMap(
+                    Function.identity(),
+                    res ->
+                        interceptorFactory.getInterceptors(
+                            new ResolverInterceptorFactoryParams(res))));
+  }
+
+  @SuppressWarnings("unchecked")
+  private static <T extends Throwable> void sneakyThrow(Throwable t) throws T {
+    throw (T) t;
+  }
+
+  public Object execute(DataFetchingEnvironment env) throws Exception {
+    if (env.getContext() instanceof ContextWrapper) {
+      ContextWrapper context = env.getContext();
+      if (env.getArgument(CLIENT_MUTATION_ID) != null) {
+        context.setClientMutationId(env.getArgument(CLIENT_MUTATION_ID));
+      }
+    } else if (env.getContext() instanceof GraphQLContext) {
+      GraphQLContext context = env.getContext();
+      if (env.getArgument(CLIENT_MUTATION_ID) != null) {
+        context.put(CLIENT_MUTATION_ID, env.getArgument(CLIENT_MUTATION_ID));
+      }
+    }
+
+    Map<String, Object> arguments = env.getArguments();
+    Resolver resolver = this.operation.getApplicableResolver(arguments.keySet());
+    if (resolver == null) {
+      throw new GraphQLException(
+          "Resolver for operation "
+              + operation.getName()
+              + " accepting arguments: "
+              + arguments.keySet()
+              + " not implemented");
+    }
+    ResolutionEnvironment resolutionEnvironment =
+        new ResolutionEnvironment(
+            resolver,
+            env,
+            this.valueMapper,
+            this.globalEnvironment,
+            this.converterRegistry,
+            this.derivedTypes);
+    try {
+      Object result = execute(resolver, resolutionEnvironment, arguments);
+      return resolutionEnvironment.convertOutput(result, resolver.getReturnType());
+    } catch (ReflectiveOperationException e) {
+      sneakyThrow(unwrap(e));
+    }
+    return null; // never happens, needed because of sneakyThrow
+  }
+
+  /**
+   * Prepares input arguments by calling respective {@link ArgumentInjector}s and invokes the
+   * underlying resolver method/field
+   *
+   * @param resolver The resolver to be invoked once the arguments are prepared
+   * @param resolutionEnvironment An object containing all contextual information needed during
+   *     operation resolution
+   * @param rawArguments Raw input arguments provided by the client
+   * @return The result returned by the underlying method/field, potentially proxied and wrapped
+   * @throws Exception If the invocation of the underlying method/field or any of the interceptors
+   *     throws
+   */
+  private Object execute(
+      Resolver resolver,
+      ResolutionEnvironment resolutionEnvironment,
+      Map<String, Object> rawArguments)
+      throws Exception {
+
+    int queryArgumentsCount = resolver.getArguments().size();
+
+    Object[] args = new Object[queryArgumentsCount];
+    for (int i = 0; i < queryArgumentsCount; i++) {
+      OperationArgument argDescriptor = resolver.getArguments().get(i);
+      Object rawArgValue = rawArguments.get(argDescriptor.getName());
+
+      args[i] = resolutionEnvironment.getInputValue(rawArgValue, argDescriptor);
+    }
+    InvocationContext invocationContext =
+        new InvocationContext(operation, resolver, resolutionEnvironment, args);
+    Queue<ResolverInterceptor> interceptors = new LinkedList<>(this.interceptors.get(resolver));
+    interceptors.add(
+        (ctx, cont) ->
+            resolver.resolve(ctx.getResolutionEnvironment().context, ctx.getArguments()));
+    return execute(invocationContext, interceptors);
+  }
+
+  private Object execute(InvocationContext context, Queue<ResolverInterceptor> interceptors)
+      throws Exception {
+    return interceptors.remove().aroundInvoke(context, (ctx) -> execute(ctx, interceptors));
+  }
+
+  private ConverterRegistry optimizeConverters(
+      Collection<Resolver> resolvers, ConverterRegistry converters) {
+    return converters.optimize(
+        resolvers.stream().map(Resolver::getReturnType).collect(Collectors.toList()));
+  }
+
+  private DerivedTypeRegistry deriveTypes(
+      Collection<Resolver> resolvers, ConverterRegistry converterRegistry) {
+    return new DerivedTypeRegistry(
+        resolvers.stream().map(Resolver::getReturnType).collect(Collectors.toList()),
+        Utils.extractInstances(
+                converterRegistry.getOutputConverters(), DelegatingOutputConverter.class)
+            .collect(Collectors.toList()));
+  }
+
+  private Throwable unwrap(ReflectiveOperationException e) {
+    Throwable cause = e.getCause();
+    if (cause != null && cause != e) {
+      return cause;
+    }
+    return e;
+  }
+}

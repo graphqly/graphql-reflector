@@ -1,0 +1,62 @@
+package io.github.graphqly.reflector.generator.mapping.common;
+
+import graphql.schema.GraphQLDirective;
+import graphql.schema.GraphQLScalarType;
+import io.github.graphqly.reflector.generator.BuildContext;
+import io.github.graphqly.reflector.generator.OperationMapper;
+import io.github.graphqly.reflector.util.ClassUtils;
+import io.github.graphqly.reflector.util.Scalars;
+import io.github.graphqly.reflector.annotations.GraphQLScalar;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedType;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Set;
+
+/** @author Bojan Tomic (kaqqao) */
+public class ObjectScalarMapper extends CachingMapper<GraphQLScalarType, GraphQLScalarType>
+    implements Comparator<AnnotatedType> {
+
+  @Override
+  public GraphQLScalarType toGraphQLType(
+      String typeName,
+      AnnotatedType javaType,
+      OperationMapper operationMapper,
+      BuildContext buildContext) {
+    GraphQLDirective[] directives =
+        buildContext.directiveBuilder
+            .buildScalarTypeDirectives(javaType, buildContext.directiveBuilderParams()).stream()
+            .map(directive -> operationMapper.toGraphQLDirective(directive, buildContext))
+            .toArray(GraphQLDirective[]::new);
+    return ClassUtils.isSuperClass(Map.class, javaType)
+        ? Scalars.graphQLMapScalar(typeName, directives)
+        : Scalars.graphQLObjectScalar(typeName, directives);
+  }
+
+  @Override
+  public GraphQLScalarType toGraphQLInputType(
+      String typeName,
+      AnnotatedType javaType,
+      OperationMapper operationMapper,
+      BuildContext buildContext) {
+    return toGraphQLType(typeName, javaType, operationMapper, buildContext);
+  }
+
+  @Override
+  public boolean supports(AnnotatedType type) {
+    return type.isAnnotationPresent(GraphQLScalar.class)
+        || Object.class.equals(type.getType())
+        || ClassUtils.isSuperClass(Map.class, type);
+  }
+
+  @Override
+  public int compare(AnnotatedType o1, AnnotatedType o2) {
+    Set<Class<? extends Annotation>> scalarAnnotation = Collections.singleton(GraphQLScalar.class);
+    return ClassUtils.removeAnnotations(o1, scalarAnnotation)
+            .equals(ClassUtils.removeAnnotations(o2, scalarAnnotation))
+        ? 0
+        : -1;
+  }
+}
