@@ -14,8 +14,8 @@ import java.util.List;
 
 public class JacksonModule implements SimpleModule {
 
-  private static JsonNodeAdapter jsonNodeAdapter = new JsonNodeAdapter();
-  private static JsonArrayAdapter jsonArrayAdapter = new JsonArrayAdapter();
+  private static final JsonNodeAdapter jsonNodeAdapter = new JsonNodeAdapter();
+  private static final JsonArrayAdapter jsonArrayAdapter = new JsonArrayAdapter();
 
   @Override
   public List<TypeMapper> getTypeMappers() {

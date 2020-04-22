@@ -2,7 +2,11 @@ package io.github.graphqly.reflector.generator.mapping;
 
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BaseTypeSynonymComparator implements Comparator<AnnotatedType> {
 

@@ -4,14 +4,14 @@ import graphql.TypeResolutionEnvironment;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLType;
 import graphql.schema.TypeResolver;
+import io.github.graphqly.reflector.annotations.GraphQLTypeResolver;
 import io.github.graphqly.reflector.metadata.exceptions.UnresolvableTypeException;
 import io.github.graphqly.reflector.metadata.messages.MessageBundle;
+import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.util.Directives;
 import io.github.graphqly.reflector.util.Utils;
 import io.leangen.geantyref.GenericTypeReflector;
-import io.github.graphqly.reflector.annotations.GraphQLTypeResolver;
-import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.List;

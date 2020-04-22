@@ -3,10 +3,10 @@ package io.github.graphqly.reflector.module.common.gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import io.github.graphqly.reflector.execution.ResolutionEnvironment;
-import io.leangen.geantyref.GenericTypeReflector;
 import io.github.graphqly.reflector.generator.mapping.DelegatingOutputConverter;
 import io.github.graphqly.reflector.generator.mapping.common.AbstractTypeSubstitutingMapper;
 import io.github.graphqly.reflector.util.ClassUtils;
+import io.leangen.geantyref.GenericTypeReflector;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.ArrayList;

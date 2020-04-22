@@ -12,7 +12,7 @@ import java.lang.reflect.AnnotatedType;
 public interface InputConverter<T, S> extends TypeSubstituter {
 
   T convertInput(
-          S substitute, AnnotatedType type, GlobalEnvironment environment, ValueMapper valueMapper);
+      S substitute, AnnotatedType type, GlobalEnvironment environment, ValueMapper valueMapper);
 
   boolean supports(AnnotatedType type);
 

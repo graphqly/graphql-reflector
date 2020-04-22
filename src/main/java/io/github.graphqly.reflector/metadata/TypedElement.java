@@ -1,7 +1,7 @@
 package io.github.graphqly.reflector.metadata;
 
-import io.leangen.geantyref.GenericTypeReflector;
 import io.github.graphqly.reflector.util.Utils;
+import io.leangen.geantyref.GenericTypeReflector;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;

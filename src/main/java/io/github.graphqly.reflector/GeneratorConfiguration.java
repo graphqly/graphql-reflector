@@ -1,9 +1,9 @@
 package io.github.graphqly.reflector;
 
-import io.github.graphqly.reflector.metadata.strategy.type.TypeTransformer;
-import io.github.graphqly.reflector.metadata.strategy.value.ScalarDeserializationStrategy;
 import io.github.graphqly.reflector.generator.JavaDeprecationMappingConfig;
 import io.github.graphqly.reflector.generator.mapping.strategy.InterfaceMappingStrategy;
+import io.github.graphqly.reflector.metadata.strategy.type.TypeTransformer;
+import io.github.graphqly.reflector.metadata.strategy.value.ScalarDeserializationStrategy;
 
 @SuppressWarnings("WeakerAccess")
 public class GeneratorConfiguration {

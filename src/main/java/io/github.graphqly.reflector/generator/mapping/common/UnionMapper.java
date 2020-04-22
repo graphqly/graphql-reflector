@@ -1,11 +1,15 @@
 package io.github.graphqly.reflector.generator.mapping.common;
 
-import graphql.schema.*;
+import graphql.schema.GraphQLInputType;
+import graphql.schema.GraphQLObjectType;
+import graphql.schema.GraphQLOutputType;
+import graphql.schema.GraphQLTypeReference;
+import graphql.schema.GraphQLUnionType;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.generator.OperationMapper;
+import io.github.graphqly.reflector.generator.mapping.TypeMapper;
 import io.github.graphqly.reflector.metadata.exceptions.TypeMappingException;
 import io.github.graphqly.reflector.util.Directives;
-import io.github.graphqly.reflector.generator.mapping.TypeMapper;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.HashSet;

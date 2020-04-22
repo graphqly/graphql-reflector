@@ -1,11 +1,11 @@
 package io.github.graphqly.reflector.metadata.strategy.query;
 
-import io.github.graphqly.reflector.metadata.exceptions.TypeMappingException;
-import io.github.graphqly.reflector.metadata.strategy.value.Property;
 import io.github.graphqly.reflector.annotations.GraphQLMutation;
 import io.github.graphqly.reflector.annotations.GraphQLQuery;
 import io.github.graphqly.reflector.annotations.GraphQLSubscription;
 import io.github.graphqly.reflector.metadata.TypedElement;
+import io.github.graphqly.reflector.metadata.exceptions.TypeMappingException;
+import io.github.graphqly.reflector.metadata.strategy.value.Property;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

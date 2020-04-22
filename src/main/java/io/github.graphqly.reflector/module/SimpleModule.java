@@ -1,10 +1,10 @@
 package io.github.graphqly.reflector.module;
 
-import io.github.graphqly.reflector.metadata.strategy.query.ResolverBuilder;
 import io.github.graphqly.reflector.generator.mapping.ArgumentInjector;
 import io.github.graphqly.reflector.generator.mapping.InputConverter;
 import io.github.graphqly.reflector.generator.mapping.OutputConverter;
 import io.github.graphqly.reflector.generator.mapping.TypeMapper;
+import io.github.graphqly.reflector.metadata.strategy.query.ResolverBuilder;
 import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
 
 import java.util.Collections;

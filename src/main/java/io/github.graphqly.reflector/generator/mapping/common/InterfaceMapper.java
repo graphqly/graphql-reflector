@@ -4,12 +4,12 @@ import graphql.schema.GraphQLFieldDefinition;
 import graphql.schema.GraphQLInputObjectType;
 import graphql.schema.GraphQLInterfaceType;
 import graphql.schema.GraphQLObjectType;
+import io.github.graphqly.reflector.annotations.types.GraphQLInterface;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.generator.OperationMapper;
+import io.github.graphqly.reflector.generator.mapping.strategy.InterfaceMappingStrategy;
 import io.github.graphqly.reflector.util.Directives;
 import io.github.graphqly.reflector.util.Utils;
-import io.github.graphqly.reflector.annotations.types.GraphQLInterface;
-import io.github.graphqly.reflector.generator.mapping.strategy.InterfaceMappingStrategy;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.List;

@@ -6,7 +6,11 @@ import graphql.schema.GraphQLFieldDefinition;
 import graphql.schema.GraphQLInputObjectField;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.generator.OperationMapper;
-import io.github.graphqly.reflector.metadata.*;
+import io.github.graphqly.reflector.metadata.Directive;
+import io.github.graphqly.reflector.metadata.DirectiveArgument;
+import io.github.graphqly.reflector.metadata.InputField;
+import io.github.graphqly.reflector.metadata.Operation;
+import io.github.graphqly.reflector.metadata.OperationArgument;
 
 public interface SchemaTransformer {
 

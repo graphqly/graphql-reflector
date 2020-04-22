@@ -3,12 +3,32 @@ package io.github.graphqly.reflector.generator;
 import graphql.GraphQLContext;
 import graphql.execution.batched.BatchedDataFetcher;
 import graphql.relay.Relay;
-import graphql.schema.*;
+import graphql.schema.DataFetcher;
+import graphql.schema.DataFetchingEnvironment;
+import graphql.schema.GraphQLArgument;
+import graphql.schema.GraphQLDirective;
+import graphql.schema.GraphQLFieldDefinition;
+import graphql.schema.GraphQLInputObjectField;
+import graphql.schema.GraphQLInputObjectType;
+import graphql.schema.GraphQLInputType;
+import graphql.schema.GraphQLInterfaceType;
+import graphql.schema.GraphQLNonNull;
+import graphql.schema.GraphQLObjectType;
+import graphql.schema.GraphQLOutputType;
+import graphql.schema.GraphQLType;
+import graphql.schema.GraphQLTypeReference;
+import graphql.schema.GraphQLUnionType;
+import graphql.schema.PropertyDataFetcher;
 import io.github.graphqly.reflector.annotations.GraphQLId;
 import io.github.graphqly.reflector.execution.ContextWrapper;
 import io.github.graphqly.reflector.execution.OperationExecutor;
 import io.github.graphqly.reflector.generator.mapping.TypeMapper;
-import io.github.graphqly.reflector.metadata.*;
+import io.github.graphqly.reflector.metadata.Directive;
+import io.github.graphqly.reflector.metadata.DirectiveArgument;
+import io.github.graphqly.reflector.metadata.InputField;
+import io.github.graphqly.reflector.metadata.Operation;
+import io.github.graphqly.reflector.metadata.OperationArgument;
+import io.github.graphqly.reflector.metadata.TypedElement;
 import io.github.graphqly.reflector.metadata.exceptions.MappingException;
 import io.github.graphqly.reflector.metadata.strategy.query.DirectiveBuilderParams;
 import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
@@ -23,7 +43,12 @@ import org.slf4j.LoggerFactory;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.AnnotatedType;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -41,18 +66,18 @@ import static io.github.graphqly.reflector.util.GraphQLUtils.CLIENT_MUTATION_ID;
  * Drives the work of mapping Java structures into their GraphQL representations. While the task of
  * mapping types is delegated to instances of {@link TypeMapper}, selection of mappers, construction
  * and attachment of resolvers (modeled by {@link DataFetcher}s in <a
- * href=https://github.com/graphql-java/graphql-java>github.io.github.graphqly.reflector.reflector-java</a>), and other universal
- * tasks are encapsulated in this class.
+ * href=https://github.com/graphql-java/graphql-java>github.io.github.graphqly.reflector.reflector-java</a>),
+ * and other universal tasks are encapsulated in this class.
  */
 public class OperationMapper {
 
   private static final Logger log = LoggerFactory.getLogger(OperationMapper.class);
   public final BuildContext buildContext;
   public final Map<String, GraphQLType> dynamicFieldTypes = new HashMap<>();
-  private List<GraphQLFieldDefinition> queries; // The list of all mapped queries
-  private List<GraphQLFieldDefinition> mutations; // The list of all mapped mutations
-  private List<GraphQLFieldDefinition> subscriptions; // The list of all mapped subscriptions
-  private List<GraphQLDirective> directives; // The list of all added mapped directives
+  private final List<GraphQLFieldDefinition> queries; // The list of all mapped queries
+  private final List<GraphQLFieldDefinition> mutations; // The list of all mapped mutations
+  private final List<GraphQLFieldDefinition> subscriptions; // The list of all mapped subscriptions
+  private final List<GraphQLDirective> directives; // The list of all added mapped directives
 
   /**
    * @param buildContext The shared context containing all the global information needed for mapping

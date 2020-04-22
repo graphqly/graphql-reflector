@@ -2,12 +2,12 @@ package io.github.graphqly.reflector.generator.mapping.core;
 
 import io.github.graphqly.reflector.execution.GlobalEnvironment;
 import io.github.graphqly.reflector.execution.ResolutionEnvironment;
+import io.github.graphqly.reflector.generator.mapping.DelegatingOutputConverter;
+import io.github.graphqly.reflector.generator.mapping.InputConverter;
 import io.github.graphqly.reflector.generator.mapping.common.AbstractTypeSubstitutingMapper;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.leangen.geantyref.GenericTypeReflector;
-import io.github.graphqly.reflector.generator.mapping.DelegatingOutputConverter;
-import io.github.graphqly.reflector.generator.mapping.InputConverter;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.Collections;
@@ -28,7 +28,7 @@ public class CompletableFutureAdapter<T> extends AbstractTypeSubstitutingMapper
 
   @Override
   public CompletableFuture<T> convertInput(
-          T substitute, AnnotatedType type, GlobalEnvironment environment, ValueMapper valueMapper) {
+      T substitute, AnnotatedType type, GlobalEnvironment environment, ValueMapper valueMapper) {
     return CompletableFuture.completedFuture(substitute);
   }
 

@@ -8,7 +8,7 @@ import java.util.Collection;
 /** @author Bojan Tomic (kaqqao) */
 public class SuperTypeBasedInterfaceStrategy extends AbstractInterfaceMappingStrategy {
 
-  private Collection<Class<?>> mappedTypes;
+  private final Collection<Class<?>> mappedTypes;
 
   public SuperTypeBasedInterfaceStrategy(Collection<Class<?>> mappedTypes, boolean mapClasses) {
     super(mapClasses);

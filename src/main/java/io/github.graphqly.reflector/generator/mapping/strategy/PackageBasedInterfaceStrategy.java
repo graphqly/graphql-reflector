@@ -7,7 +7,7 @@ import java.lang.reflect.AnnotatedType;
 /** @author Bojan Tomic (kaqqao) */
 public class PackageBasedInterfaceStrategy extends AbstractInterfaceMappingStrategy {
 
-  private String packageName;
+  private final String packageName;
 
   public PackageBasedInterfaceStrategy(String packageName, boolean mapClasses) {
     super(mapClasses);

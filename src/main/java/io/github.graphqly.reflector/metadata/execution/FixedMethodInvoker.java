@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 /** Created by bojan.tomic on 3/5/16. */
 public class FixedMethodInvoker extends MethodInvoker {
 
-  private Supplier<Object> targetSupplier;
+  private final Supplier<Object> targetSupplier;
 
   public FixedMethodInvoker(
       Supplier<Object> targetSupplier, Method resolverMethod, AnnotatedType enclosingType) {

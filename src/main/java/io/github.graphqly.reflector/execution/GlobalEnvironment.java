@@ -1,11 +1,11 @@
 package io.github.graphqly.reflector.execution;
 
 import graphql.relay.Relay;
-import io.github.graphqly.reflector.generator.mapping.OutputConverter;
 import io.github.graphqly.reflector.generator.TypeRegistry;
 import io.github.graphqly.reflector.generator.mapping.ArgumentInjectorRegistry;
 import io.github.graphqly.reflector.generator.mapping.ConverterRegistry;
 import io.github.graphqly.reflector.generator.mapping.InputConverter;
+import io.github.graphqly.reflector.generator.mapping.OutputConverter;
 import io.github.graphqly.reflector.metadata.messages.MessageBundle;
 import io.github.graphqly.reflector.metadata.strategy.InclusionStrategy;
 import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;

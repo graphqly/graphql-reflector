@@ -3,7 +3,11 @@ package io.github.graphqly.reflector.execution;
 import io.github.graphqly.reflector.generator.mapping.DelegatingOutputConverter;
 
 import java.lang.reflect.AnnotatedType;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
 
 class DerivedTypeRegistry {
 

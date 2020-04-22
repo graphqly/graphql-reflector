@@ -5,11 +5,11 @@ import graphql.schema.GraphQLEnumType;
 import graphql.schema.GraphQLEnumValueDefinition;
 import io.github.graphqly.reflector.annotations.GraphQLEnumValue;
 import io.github.graphqly.reflector.generator.BuildContext;
+import io.github.graphqly.reflector.generator.JavaDeprecationMappingConfig;
 import io.github.graphqly.reflector.generator.OperationMapper;
 import io.github.graphqly.reflector.metadata.messages.MessageBundle;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.util.ReservedStrings;
-import io.github.graphqly.reflector.generator.JavaDeprecationMappingConfig;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.Arrays;

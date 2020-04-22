@@ -11,13 +11,13 @@ import graphql.schema.GraphQLOutputType;
 import io.github.graphqly.reflector.execution.ResolutionEnvironment;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.generator.OperationMapper;
+import io.github.graphqly.reflector.generator.mapping.OutputConverter;
+import io.github.graphqly.reflector.generator.mapping.SchemaTransformer;
 import io.github.graphqly.reflector.generator.mapping.common.AbstractTypeSubstitutingMapper;
 import io.github.graphqly.reflector.metadata.Operation;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.leangen.geantyref.GenericTypeReflector;
 import io.leangen.geantyref.TypeFactory;
-import io.github.graphqly.reflector.generator.mapping.OutputConverter;
-import io.github.graphqly.reflector.generator.mapping.SchemaTransformer;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -108,7 +108,7 @@ public class PublisherAdapter<T> extends AbstractTypeSubstitutingMapper
             publisher.subscribe(
                 new Subscriber<R>() {
 
-                  private List<R> buffer = new ArrayList<>();
+                  private final List<R> buffer = new ArrayList<>();
 
                   @Override
                   public void onSubscribe(Subscription subscription) {

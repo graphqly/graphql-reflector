@@ -2,7 +2,16 @@ package io.github.graphqly.reflector.util;
 
 import graphql.DirectivesUtil;
 import graphql.introspection.Introspection;
-import graphql.schema.*;
+import graphql.schema.Coercing;
+import graphql.schema.CoercingParseLiteralException;
+import graphql.schema.CoercingParseValueException;
+import graphql.schema.GraphQLArgument;
+import graphql.schema.GraphQLDirective;
+import graphql.schema.GraphQLDirectiveContainer;
+import graphql.schema.GraphQLFieldDefinition;
+import graphql.schema.GraphQLInputObjectField;
+import graphql.schema.GraphQLScalarType;
+import graphql.schema.GraphQLType;
 import io.github.graphqly.reflector.metadata.InputField;
 import io.github.graphqly.reflector.metadata.Operation;
 

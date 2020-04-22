@@ -105,7 +105,7 @@ class GraphQLReflectorImpl extends GraphQLReflector {
   public String inspectOperation(String name) {
     GraphQLObjectType mutationType = schema.getMutationType();
     boolean isMutationFunction =
-        mutationType == null ? false : mutationType.getFieldDefinition(name) != null;
+            mutationType != null && mutationType.getFieldDefinition(name) != null;
 
     try {
       FunctionPrinter functionPrinter =

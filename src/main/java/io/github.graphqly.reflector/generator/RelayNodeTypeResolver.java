@@ -8,7 +8,7 @@ import io.github.graphqly.reflector.util.GraphQLUtils;
 class RelayNodeTypeResolver extends DelegatingTypeResolver {
 
   RelayNodeTypeResolver(
-          TypeRegistry typeRegistry, TypeInfoGenerator typeInfoGenerator, MessageBundle messageBundle) {
+      TypeRegistry typeRegistry, TypeInfoGenerator typeInfoGenerator, MessageBundle messageBundle) {
     super(GraphQLUtils.NODE, typeRegistry, typeInfoGenerator, messageBundle);
   }
 }

@@ -9,7 +9,7 @@ import java.lang.reflect.Parameter;
 /** Created by bojan.tomic on 7/20/16. */
 public class FieldAccessor extends Executable<Field> {
 
-  private AnnotatedType enclosingType;
+  private final AnnotatedType enclosingType;
 
   public FieldAccessor(Field field, AnnotatedType enclosingType) {
     this.delegate = field;

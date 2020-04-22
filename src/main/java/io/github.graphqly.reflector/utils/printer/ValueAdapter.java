@@ -3,7 +3,14 @@ package io.github.graphqly.reflector.utils.printer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import graphql.language.*;
+import graphql.language.ArrayValue;
+import graphql.language.BooleanValue;
+import graphql.language.FloatValue;
+import graphql.language.IntValue;
+import graphql.language.ObjectField;
+import graphql.language.ObjectValue;
+import graphql.language.StringValue;
+import graphql.language.Value;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

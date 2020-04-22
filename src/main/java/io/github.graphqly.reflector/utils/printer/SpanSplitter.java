@@ -9,13 +9,8 @@ import java.util.regex.Pattern;
 
 /** Class to split input strings into a list of spans: string & non_string */
 public class SpanSplitter {
-  public enum SpanKind {
-    STRING,
-    NON_STRING
-  }
-
-  private static Pattern SINGLE_QUOTED_STRING_PATTERN = Pattern.compile("'(\\\\.|[^'])*'");
-  private static Pattern DOUBLE_QUOTED_STRING_PATTERN = Pattern.compile("\"(\\\\.|[^\"])*\"");
+  private static final Pattern SINGLE_QUOTED_STRING_PATTERN = Pattern.compile("'(\\\\.|[^'])*'");
+  private static final Pattern DOUBLE_QUOTED_STRING_PATTERN = Pattern.compile("\"(\\\\.|[^\"])*\"");
 
   private static void matchString(String input, Pattern pattern, List<Span> spans) {
     Matcher matcher = pattern.matcher(input);
@@ -79,6 +74,11 @@ public class SpanSplitter {
 
     Collections.sort(stringSpans, Comparator.comparingInt(span -> span.begin));
     return stringSpans;
+  }
+
+  public enum SpanKind {
+    STRING,
+    NON_STRING
   }
 
   static class Span {

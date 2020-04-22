@@ -1,8 +1,8 @@
 package io.github.graphqly.reflector.metadata.strategy.type;
 
 import io.github.graphqly.reflector.metadata.exceptions.TypeMappingException;
-import io.leangen.geantyref.GenericTypeReflector;
 import io.github.graphqly.reflector.util.ClassUtils;
+import io.leangen.geantyref.GenericTypeReflector;
 
 import java.lang.reflect.AnnotatedType;
 

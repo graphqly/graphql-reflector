@@ -1,11 +1,11 @@
 package io.github.graphqly.reflector.generator.mapping.common;
 
 import io.github.graphqly.reflector.execution.GlobalEnvironment;
+import io.github.graphqly.reflector.generator.mapping.InputConverter;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.leangen.geantyref.GenericTypeReflector;
 import io.leangen.geantyref.TypeFactory;
-import io.github.graphqly.reflector.generator.mapping.InputConverter;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.List;

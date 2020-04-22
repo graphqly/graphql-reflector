@@ -1,8 +1,23 @@
 package io.github.graphqly.reflector.util;
 
 import graphql.GraphQLException;
-import graphql.language.*;
-import graphql.schema.*;
+import graphql.language.ArrayValue;
+import graphql.language.BooleanValue;
+import graphql.language.EnumValue;
+import graphql.language.FloatValue;
+import graphql.language.IntValue;
+import graphql.language.NullValue;
+import graphql.language.ObjectValue;
+import graphql.language.StringValue;
+import graphql.language.Value;
+import graphql.language.VariableReference;
+import graphql.schema.Coercing;
+import graphql.schema.CoercingParseLiteralException;
+import graphql.schema.CoercingParseValueException;
+import graphql.schema.CoercingSerializeException;
+import graphql.schema.GraphQLDirective;
+import graphql.schema.GraphQLNonNull;
+import graphql.schema.GraphQLScalarType;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -12,8 +27,27 @@ import java.net.URI;
 import java.net.URL;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.*;
-import java.util.*;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.OffsetTime;
+import java.time.Period;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static graphql.Scalars.*;
@@ -341,7 +375,7 @@ public class Scalars {
           s -> new Date(Instant.parse(s).toEpochMilli()),
           i -> new Date(i.toEpochMilli()),
           Scalars::dateToString);
-  private static Coercing MAP_SCALAR_COERCION =
+  private static final Coercing MAP_SCALAR_COERCION =
       new Coercing<Object, Object>() {
         @Override
         public Object serialize(Object dataFetcherResult) {
@@ -366,7 +400,7 @@ public class Scalars {
           return parseObjectValue(literalOrException(input, ObjectValue.class), variables);
         }
       };
-  private static Coercing OBJECT_SCALAR_COERCION =
+  private static final Coercing OBJECT_SCALAR_COERCION =
       new Coercing<Object, Object>() {
         @Override
         public Object serialize(Object dataFetcherResult) {

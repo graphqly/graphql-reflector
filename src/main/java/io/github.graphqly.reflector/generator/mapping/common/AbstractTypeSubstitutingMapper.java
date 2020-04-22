@@ -5,8 +5,8 @@ import graphql.schema.GraphQLOutputType;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.generator.OperationMapper;
 import io.github.graphqly.reflector.generator.mapping.TypeMapper;
-import io.leangen.geantyref.GenericTypeReflector;
 import io.github.graphqly.reflector.generator.mapping.TypeSubstituter;
+import io.leangen.geantyref.GenericTypeReflector;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.Set;

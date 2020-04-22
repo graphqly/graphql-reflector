@@ -3,9 +3,9 @@ package io.github.graphqly.reflector.generator.mapping.common;
 import io.github.graphqly.reflector.annotations.GraphQLRootContext;
 import io.github.graphqly.reflector.execution.ContextWrapper;
 import io.github.graphqly.reflector.execution.ResolutionEnvironment;
-import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.generator.mapping.ArgumentInjector;
 import io.github.graphqly.reflector.generator.mapping.ArgumentInjectorParams;
+import io.github.graphqly.reflector.util.ClassUtils;
 
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Parameter;

@@ -1,15 +1,19 @@
 package io.github.graphqly.reflector.generator.mapping.strategy;
 
+import io.github.classgraph.ClassInfo;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.metadata.exceptions.TypeMappingException;
 import io.github.graphqly.reflector.util.ClassFinder;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.util.Utils;
-import io.github.classgraph.ClassInfo;
 import io.leangen.geantyref.GenericTypeReflector;
 
 import java.lang.reflect.AnnotatedType;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,7 +36,8 @@ public class DefaultImplementationDiscoveryStrategy implements ImplementationDis
       scanPackages = buildContext.basePackages;
     }
     Predicate<ClassInfo> filter =
-        ClassFinder.NON_IGNORED.and(filters.stream().reduce(Predicate::and).orElse(ClassFinder.ALL));
+        ClassFinder.NON_IGNORED.and(
+            filters.stream().reduce(Predicate::and).orElse(ClassFinder.ALL));
 
     List<AnnotatedType> additionalImpls = additionalImplementationsOf(type);
     if (!autoDiscover) {

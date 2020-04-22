@@ -1,8 +1,8 @@
 package io.github.graphqly.reflector.metadata.strategy.value;
 
-import io.github.graphqly.reflector.execution.GlobalEnvironment;
 import io.github.graphqly.reflector.annotations.GraphQLInputField;
 import io.github.graphqly.reflector.annotations.GraphQLQuery;
+import io.github.graphqly.reflector.execution.GlobalEnvironment;
 import io.github.graphqly.reflector.metadata.messages.MessageBundle;
 import io.github.graphqly.reflector.util.ReservedStrings;
 import io.github.graphqly.reflector.util.Utils;

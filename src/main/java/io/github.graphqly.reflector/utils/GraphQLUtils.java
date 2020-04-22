@@ -2,7 +2,13 @@ package io.github.graphqly.reflector.util;
 
 import graphql.language.Field;
 import graphql.relay.Relay;
-import graphql.schema.*;
+import graphql.schema.GraphQLArgument;
+import graphql.schema.GraphQLFieldDefinition;
+import graphql.schema.GraphQLInterfaceType;
+import graphql.schema.GraphQLModifiedType;
+import graphql.schema.GraphQLNonNull;
+import graphql.schema.GraphQLObjectType;
+import graphql.schema.GraphQLType;
 import io.github.graphqly.reflector.annotations.GraphQLId;
 
 public class GraphQLUtils {

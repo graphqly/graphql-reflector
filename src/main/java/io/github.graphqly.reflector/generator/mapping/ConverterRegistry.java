@@ -3,7 +3,11 @@ package io.github.graphqly.reflector.generator.mapping;
 import io.github.graphqly.reflector.util.ClassUtils;
 
 import java.lang.reflect.AnnotatedType;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /** @author Bojan Tomic (kaqqao) */
 public class ConverterRegistry {

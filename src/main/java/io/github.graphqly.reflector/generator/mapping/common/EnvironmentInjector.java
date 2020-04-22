@@ -3,11 +3,11 @@ package io.github.graphqly.reflector.generator.mapping.common;
 import graphql.language.Field;
 import io.github.graphqly.reflector.annotations.GraphQLEnvironment;
 import io.github.graphqly.reflector.execution.ResolutionEnvironment;
+import io.github.graphqly.reflector.generator.mapping.ArgumentInjector;
+import io.github.graphqly.reflector.generator.mapping.ArgumentInjectorParams;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 import io.leangen.geantyref.GenericTypeReflector;
 import io.leangen.geantyref.TypeToken;
-import io.github.graphqly.reflector.generator.mapping.ArgumentInjector;
-import io.github.graphqly.reflector.generator.mapping.ArgumentInjectorParams;
 
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Parameter;

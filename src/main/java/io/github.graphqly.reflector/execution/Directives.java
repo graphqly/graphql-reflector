@@ -7,21 +7,31 @@ import graphql.analysis.QueryVisitorStub;
 import graphql.execution.ExecutionStepInfo;
 import graphql.execution.ValuesResolver;
 import graphql.introspection.Introspection;
-import graphql.language.*;
+import graphql.language.Directive;
+import graphql.language.Field;
+import graphql.language.InlineFragment;
+import graphql.language.Node;
+import graphql.language.OperationDefinition;
 import graphql.schema.DataFetchingEnvironment;
 import graphql.schema.GraphQLDirective;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLType;
 import io.github.graphqly.reflector.util.GraphQLUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Directives {
 
   private static final ValuesResolver valuesResolver = new ValuesResolver();
-  private Map<Introspection.DirectiveLocation, Map<String, List<Map<String, Object>>>> directives =
+  private final Map<Introspection.DirectiveLocation, Map<String, List<Map<String, Object>>>> directives =
       new HashMap<>();
 
   Directives(DataFetchingEnvironment env, ExecutionStepInfo step) {

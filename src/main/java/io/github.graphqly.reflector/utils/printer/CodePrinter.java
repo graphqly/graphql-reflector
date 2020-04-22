@@ -3,11 +3,28 @@ package io.github.graphqly.reflector.utils.printer;
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
-import java.util.*;
+import java.util.Formatter;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -23,25 +40,24 @@ public class CodePrinter extends Writer {
    * stream was created.
    */
   private final String lineSeparator;
+  private final char NEW_LINE_CHAR = '\n';
   /**
    * The underlying character-output stream of this <code>CodePrinter</code>.
    *
    * @since 1.2
    */
   protected Writer out;
-
   private boolean trouble = false;
   private Formatter formatter;
   private PrintStream psOut = null;
   private int indentationLevel = 0;
-  private IndentationStrategy indentationStrategy = IndentationStrategy.USE_TAB_CHARACTER;
-  private Map<IndentationStrategy, String> indentations =
+  private final IndentationStrategy indentationStrategy = IndentationStrategy.USE_TAB_CHARACTER;
+  private final Map<IndentationStrategy, String> indentations =
       ImmutableMap.of(
           IndentationStrategy.USE_TAB_CHARACTER, "\t",
           IndentationStrategy.USE_TWO_SPACES, StringUtils.repeat(" ", 2),
           IndentationStrategy.USE_FOUR_SPACES, StringUtils.repeat(" ", 4));
-  private Map<String, String> indentationCaches = new ConcurrentHashMap<>();
-  private final char NEW_LINE_CHAR = '\n';
+  private final Map<String, String> indentationCaches = new ConcurrentHashMap<>();
 
   /**
    * Creates a new CodePrinter, without automatic line flushing.
@@ -208,6 +224,23 @@ public class CodePrinter extends Writer {
     }
   }
 
+  public static String prettyPrint(String input) {
+    StringWriter out = new StringWriter();
+    CodePrinter printer = new CodePrinter(out);
+    printer.printIndent(input);
+    printer.flush();
+    return out.toString();
+  }
+
+  public static void prettyPrintConsole(String input) {
+    System.out.println(prettyPrint(input));
+  }
+
+  /*
+   * Exception-catching, synchronized output operations,
+   * which also implement the write() methods of Writer
+   */
+
   /** Checks to make sure that the stream has not been closed */
   private void ensureOpen() throws IOException {
     if (out == null) throw new IOException("Stream closed");
@@ -228,11 +261,6 @@ public class CodePrinter extends Writer {
       trouble = true;
     }
   }
-
-  /*
-   * Exception-catching, synchronized output operations,
-   * which also implement the write() methods of Writer
-   */
 
   /**
    * Closes the stream and releases any system resources associated with it. Closing a previously
@@ -293,6 +321,8 @@ public class CodePrinter extends Writer {
     trouble = false;
   }
 
+  /* Methods that do not terminate lines */
+
   /**
    * Writes a single character.
    *
@@ -330,8 +360,6 @@ public class CodePrinter extends Writer {
       trouble = true;
     }
   }
-
-  /* Methods that do not terminate lines */
 
   /**
    * Writes an array of characters. This method cannot be inherited from the Writer class because it
@@ -425,6 +453,8 @@ public class CodePrinter extends Writer {
     write(String.valueOf(i));
   }
 
+  /* Methods that do terminate lines */
+
   /**
    * Prints a long integer. The string produced by <code>{@link
    * java.lang.String#valueOf(long)}</code> is translated into bytes according to the platform's
@@ -450,8 +480,6 @@ public class CodePrinter extends Writer {
   public void print(float f) {
     write(String.valueOf(f));
   }
-
-  /* Methods that do terminate lines */
 
   /**
    * Prints a double-precision floating-point number. The string produced by <code>
@@ -1107,17 +1135,5 @@ public class CodePrinter extends Writer {
       result.position = position;
       return result;
     }
-  }
-
-  public static String prettyPrint(String input) {
-    StringWriter out = new StringWriter();
-    CodePrinter printer = new CodePrinter(out);
-    printer.printIndent(input);
-    printer.flush();
-    return out.toString();
-  }
-
-  public static void prettyPrintConsole(String input) {
-    System.out.println(prettyPrint(input));
   }
 }

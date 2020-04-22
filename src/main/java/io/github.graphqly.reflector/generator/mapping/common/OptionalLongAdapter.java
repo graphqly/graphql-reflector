@@ -2,8 +2,8 @@ package io.github.graphqly.reflector.generator.mapping.common;
 
 import io.github.graphqly.reflector.execution.GlobalEnvironment;
 import io.github.graphqly.reflector.execution.ResolutionEnvironment;
-import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 import io.github.graphqly.reflector.generator.mapping.AbstractSimpleTypeAdapter;
+import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.OptionalLong;
@@ -18,7 +18,7 @@ public class OptionalLongAdapter extends AbstractSimpleTypeAdapter<OptionalLong,
 
   @Override
   public OptionalLong convertInput(
-          Long substitute, AnnotatedType type, GlobalEnvironment environment, ValueMapper valueMapper) {
+      Long substitute, AnnotatedType type, GlobalEnvironment environment, ValueMapper valueMapper) {
     return substitute == null ? OptionalLong.empty() : OptionalLong.of(substitute);
   }
 }

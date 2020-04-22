@@ -12,7 +12,11 @@ import io.github.graphqly.reflector.metadata.Resolver;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 import io.github.graphqly.reflector.util.Utils;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 

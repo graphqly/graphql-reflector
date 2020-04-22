@@ -1,17 +1,17 @@
 package io.github.graphqly.reflector.metadata.strategy.query;
 
 import graphql.language.OperationDefinition;
-import io.github.graphqly.reflector.execution.GlobalEnvironment;
-import io.github.graphqly.reflector.metadata.exceptions.TypeMappingException;
-import io.leangen.geantyref.GenericTypeReflector;
 import io.github.graphqly.reflector.annotations.GraphQLUnion;
+import io.github.graphqly.reflector.execution.GlobalEnvironment;
 import io.github.graphqly.reflector.generator.union.Union;
 import io.github.graphqly.reflector.metadata.Operation;
 import io.github.graphqly.reflector.metadata.OperationArgument;
 import io.github.graphqly.reflector.metadata.Resolver;
+import io.github.graphqly.reflector.metadata.exceptions.TypeMappingException;
 import io.github.graphqly.reflector.metadata.messages.MessageBundle;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.util.Urls;
+import io.leangen.geantyref.GenericTypeReflector;
 
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Type;

@@ -3,8 +3,8 @@ package io.github.graphqly.reflector.util;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ScanResult;
-import io.leangen.geantyref.GenericTypeReflector;
 import io.github.graphqly.reflector.annotations.GraphQLIgnore;
+import io.leangen.geantyref.GenericTypeReflector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

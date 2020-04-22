@@ -5,12 +5,12 @@ import graphql.schema.GraphQLModifiedType;
 import graphql.schema.GraphQLOutputType;
 import graphql.schema.GraphQLType;
 import io.github.graphqly.reflector.execution.GlobalEnvironment;
+import io.github.graphqly.reflector.generator.mapping.TypeMapperRegistry;
+import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.util.Directives;
 import io.github.graphqly.reflector.util.Urls;
 import io.leangen.geantyref.GenericTypeReflector;
-import io.github.graphqly.reflector.generator.mapping.TypeMapperRegistry;
-import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.Collection;

@@ -5,8 +5,8 @@ import io.github.graphqly.reflector.annotations.GraphQLUnion;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.generator.OperationMapper;
 import io.github.graphqly.reflector.generator.mapping.TypeMapper;
-import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.generator.union.Union;
+import io.github.graphqly.reflector.util.ClassUtils;
 
 import java.lang.reflect.AnnotatedParameterizedType;
 import java.lang.reflect.AnnotatedType;

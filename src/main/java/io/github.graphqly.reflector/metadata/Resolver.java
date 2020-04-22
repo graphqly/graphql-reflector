@@ -2,8 +2,8 @@ package io.github.graphqly.reflector.metadata;
 
 import io.github.graphqly.reflector.metadata.exceptions.MappingException;
 import io.github.graphqly.reflector.metadata.execution.Executable;
-import io.leangen.geantyref.GenericTypeReflector;
 import io.github.graphqly.reflector.util.Utils;
+import io.leangen.geantyref.GenericTypeReflector;
 
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.InvocationTargetException;

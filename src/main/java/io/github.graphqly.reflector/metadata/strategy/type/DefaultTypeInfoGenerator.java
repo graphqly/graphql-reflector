@@ -1,12 +1,12 @@
 package io.github.graphqly.reflector.metadata.strategy.type;
 
-import io.github.graphqly.reflector.metadata.messages.MessageBundle;
-import io.github.graphqly.reflector.util.ClassUtils;
-import io.github.graphqly.reflector.util.Utils;
 import io.github.graphqly.reflector.annotations.types.GraphQLDirective;
 import io.github.graphqly.reflector.annotations.types.GraphQLInterface;
 import io.github.graphqly.reflector.annotations.types.GraphQLType;
 import io.github.graphqly.reflector.annotations.types.GraphQLUnion;
+import io.github.graphqly.reflector.metadata.messages.MessageBundle;
+import io.github.graphqly.reflector.util.ClassUtils;
+import io.github.graphqly.reflector.util.Utils;
 
 import java.beans.Introspector;
 import java.lang.reflect.AnnotatedParameterizedType;

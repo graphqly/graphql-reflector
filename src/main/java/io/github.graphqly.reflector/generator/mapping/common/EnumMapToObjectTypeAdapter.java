@@ -7,11 +7,11 @@ import graphql.schema.GraphQLObjectType;
 import io.github.graphqly.reflector.execution.GlobalEnvironment;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.generator.OperationMapper;
+import io.github.graphqly.reflector.generator.mapping.InputConverter;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.leangen.geantyref.GenericTypeReflector;
 import io.leangen.geantyref.TypeFactory;
-import io.github.graphqly.reflector.generator.mapping.InputConverter;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.Arrays;

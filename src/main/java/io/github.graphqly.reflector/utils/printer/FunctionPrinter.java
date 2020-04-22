@@ -1,7 +1,13 @@
 package io.github.graphqly.reflector.utils.printer;
 
 import graphql.scalars.object.ObjectScalar;
-import graphql.schema.*;
+import graphql.schema.GraphQLArgument;
+import graphql.schema.GraphQLFieldDefinition;
+import graphql.schema.GraphQLList;
+import graphql.schema.GraphQLObjectType;
+import graphql.schema.GraphQLOutputType;
+import graphql.schema.GraphQLSchema;
+import graphql.schema.GraphQLType;
 import io.github.graphqly.reflector.generator.OperationMapper;
 import lombok.Builder;
 import lombok.Setter;

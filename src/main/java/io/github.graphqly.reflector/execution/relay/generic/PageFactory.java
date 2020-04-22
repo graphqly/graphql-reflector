@@ -1,6 +1,11 @@
 package io.github.graphqly.reflector.execution.relay.generic;
 
-import graphql.relay.*;
+import graphql.relay.ConnectionCursor;
+import graphql.relay.DefaultConnectionCursor;
+import graphql.relay.DefaultEdge;
+import graphql.relay.DefaultPageInfo;
+import graphql.relay.Edge;
+import graphql.relay.PageInfo;
 import io.github.graphqly.reflector.execution.relay.Connection;
 import io.github.graphqly.reflector.execution.relay.CursorProvider;
 import io.github.graphqly.reflector.execution.relay.Page;

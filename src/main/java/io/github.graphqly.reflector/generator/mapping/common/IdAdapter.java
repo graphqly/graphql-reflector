@@ -8,7 +8,11 @@ import io.github.graphqly.reflector.execution.GlobalEnvironment;
 import io.github.graphqly.reflector.execution.ResolutionEnvironment;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.generator.OperationMapper;
-import io.github.graphqly.reflector.generator.mapping.*;
+import io.github.graphqly.reflector.generator.mapping.ArgumentInjector;
+import io.github.graphqly.reflector.generator.mapping.ArgumentInjectorParams;
+import io.github.graphqly.reflector.generator.mapping.InputConverter;
+import io.github.graphqly.reflector.generator.mapping.OutputConverter;
+import io.github.graphqly.reflector.generator.mapping.TypeMapper;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 import io.leangen.geantyref.GenericTypeReflector;
 
@@ -29,7 +33,9 @@ public class IdAdapter
       OperationMapper operationMapper,
       Set<Class<? extends TypeMapper>> mappersToSkip,
       BuildContext buildContext) {
-    return javaType.getAnnotation(GraphQLId.class).relayId() ? io.github.graphqly.reflector.util.Scalars.RelayId : Scalars.GraphQLID;
+    return javaType.getAnnotation(GraphQLId.class).relayId()
+        ? io.github.graphqly.reflector.util.Scalars.RelayId
+        : Scalars.GraphQLID;
   }
 
   @Override
@@ -38,7 +44,9 @@ public class IdAdapter
       OperationMapper operationMapper,
       Set<Class<? extends TypeMapper>> mappersToSkip,
       BuildContext buildContext) {
-    return javaType.getAnnotation(GraphQLId.class).relayId() ? io.github.graphqly.reflector.util.Scalars.RelayId : Scalars.GraphQLID;
+    return javaType.getAnnotation(GraphQLId.class).relayId()
+        ? io.github.graphqly.reflector.util.Scalars.RelayId
+        : Scalars.GraphQLID;
   }
 
   @Override

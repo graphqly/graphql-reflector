@@ -1,8 +1,8 @@
 package io.github.graphqly.reflector.generator.mapping;
 
+import io.github.graphqly.reflector.annotations.GraphQLIgnore;
 import io.github.graphqly.reflector.metadata.exceptions.MappingException;
 import io.github.graphqly.reflector.util.ClassUtils;
-import io.github.graphqly.reflector.annotations.GraphQLIgnore;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.Collections;

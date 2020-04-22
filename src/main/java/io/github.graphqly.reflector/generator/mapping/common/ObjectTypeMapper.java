@@ -1,14 +1,22 @@
 package io.github.graphqly.reflector.generator.mapping.common;
 
-import graphql.schema.*;
+import graphql.schema.GraphQLEnumType;
+import graphql.schema.GraphQLFieldDefinition;
+import graphql.schema.GraphQLInputObjectField;
+import graphql.schema.GraphQLInputObjectType;
+import graphql.schema.GraphQLInputType;
+import graphql.schema.GraphQLInterfaceType;
+import graphql.schema.GraphQLObjectType;
+import graphql.schema.GraphQLOutputType;
+import graphql.schema.GraphQLTypeReference;
 import io.github.graphqly.reflector.generator.BuildContext;
+import io.github.graphqly.reflector.generator.OperationMapper;
 import io.github.graphqly.reflector.metadata.strategy.value.InputFieldBuilderParams;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.util.Directives;
-import io.leangen.geantyref.GenericTypeReflector;
-import io.github.graphqly.reflector.generator.OperationMapper;
 import io.github.graphqly.reflector.util.GraphQLUtils;
+import io.leangen.geantyref.GenericTypeReflector;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.ArrayList;

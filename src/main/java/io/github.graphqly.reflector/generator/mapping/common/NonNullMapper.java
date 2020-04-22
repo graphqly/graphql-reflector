@@ -1,14 +1,24 @@
 package io.github.graphqly.reflector.generator.mapping.common;
 
-import graphql.schema.*;
+import graphql.schema.GraphQLArgument;
+import graphql.schema.GraphQLFieldDefinition;
+import graphql.schema.GraphQLInputObjectField;
+import graphql.schema.GraphQLInputType;
+import graphql.schema.GraphQLNonNull;
+import graphql.schema.GraphQLOutputType;
+import graphql.schema.GraphQLType;
 import io.github.graphqly.reflector.annotations.GraphQLIgnore;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.generator.OperationMapper;
+import io.github.graphqly.reflector.generator.mapping.SchemaTransformer;
 import io.github.graphqly.reflector.generator.mapping.TypeMapper;
-import io.github.graphqly.reflector.metadata.*;
+import io.github.graphqly.reflector.metadata.DirectiveArgument;
+import io.github.graphqly.reflector.metadata.InputField;
+import io.github.graphqly.reflector.metadata.Operation;
+import io.github.graphqly.reflector.metadata.OperationArgument;
+import io.github.graphqly.reflector.metadata.TypedElement;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.util.GraphQLUtils;
-import io.github.graphqly.reflector.generator.mapping.SchemaTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

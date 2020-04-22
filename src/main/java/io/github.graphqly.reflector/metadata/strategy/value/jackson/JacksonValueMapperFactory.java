@@ -7,17 +7,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import io.github.graphqly.reflector.execution.GlobalEnvironment;
-import io.leangen.geantyref.GenericTypeReflector;
 import io.github.graphqly.reflector.metadata.messages.MessageBundle;
 import io.github.graphqly.reflector.metadata.strategy.type.DefaultTypeInfoGenerator;
 import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
 import io.github.graphqly.reflector.metadata.strategy.value.ScalarDeserializationStrategy;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapperFactory;
 import io.github.graphqly.reflector.util.ClassUtils;
+import io.leangen.geantyref.GenericTypeReflector;
 
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** @author Bojan Tomic (kaqqao) */
@@ -164,7 +170,8 @@ public class JacksonValueMapperFactory
         Map<Type, List<NamedType>> ambiguousTypes,
         MessageBundle messageBundle) {
       SimpleModule module =
-          new SimpleModule("github.io.github.graphqly.reflector.reflector-spqr-annotation-introspector") {
+          new SimpleModule(
+              "github.io.github.graphqly.reflector.reflector-spqr-annotation-introspector") {
             @Override
             public void setupModule(SetupContext context) {
               super.setupModule(context);
@@ -214,7 +221,7 @@ public class JacksonValueMapperFactory
 
   public static class Builder {
 
-    private List<Configurer> configurers = defaultConfigurers();
+    private final List<Configurer> configurers = defaultConfigurers();
     private TypeInfoGenerator typeInfoGenerator = new DefaultTypeInfoGenerator();
     private ObjectMapper prototype;
 

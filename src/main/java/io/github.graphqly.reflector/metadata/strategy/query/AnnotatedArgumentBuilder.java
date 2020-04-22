@@ -1,14 +1,14 @@
 package io.github.graphqly.reflector.metadata.strategy.query;
 
-import io.github.graphqly.reflector.execution.GlobalEnvironment;
-import io.github.graphqly.reflector.metadata.exceptions.TypeMappingException;
-import io.github.graphqly.reflector.metadata.strategy.value.DefaultValueProvider;
 import io.github.graphqly.reflector.annotations.GraphQLArgument;
 import io.github.graphqly.reflector.annotations.GraphQLContext;
 import io.github.graphqly.reflector.annotations.GraphQLId;
+import io.github.graphqly.reflector.execution.GlobalEnvironment;
 import io.github.graphqly.reflector.metadata.OperationArgument;
+import io.github.graphqly.reflector.metadata.exceptions.TypeMappingException;
 import io.github.graphqly.reflector.metadata.messages.MessageBundle;
 import io.github.graphqly.reflector.metadata.strategy.InclusionStrategy;
+import io.github.graphqly.reflector.metadata.strategy.value.DefaultValueProvider;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.util.ReservedStrings;
 import io.github.graphqly.reflector.util.Urls;

@@ -1,12 +1,12 @@
 package io.github.graphqly.reflector.util;
 
+import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapperFactory;
 import io.github.graphqly.reflector.metadata.strategy.value.gson.GsonValueMapperFactory;
 import io.github.graphqly.reflector.metadata.strategy.value.jackson.JacksonValueMapperFactory;
 import io.github.graphqly.reflector.module.Module;
 import io.github.graphqly.reflector.module.common.gson.GsonModule;
 import io.github.graphqly.reflector.module.common.jackson.JacksonModule;
-import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

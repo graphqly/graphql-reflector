@@ -1,9 +1,9 @@
 package io.github.graphqly.reflector.generator.mapping.common;
 
 import io.github.graphqly.reflector.execution.ResolutionEnvironment;
+import io.github.graphqly.reflector.generator.mapping.DelegatingOutputConverter;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.leangen.geantyref.GenericTypeReflector;
-import io.github.graphqly.reflector.generator.mapping.DelegatingOutputConverter;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.Arrays;

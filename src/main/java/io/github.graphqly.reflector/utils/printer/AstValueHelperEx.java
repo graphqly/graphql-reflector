@@ -1,10 +1,33 @@
 package io.github.graphqly.reflector.utils.printer;
 
 import com.google.gson.JsonObject;
-import graphql.*;
-import graphql.language.*;
+import graphql.Assert;
+import graphql.AssertException;
+import graphql.GraphQLException;
+import graphql.Internal;
+import graphql.Scalars;
+import graphql.language.ArrayValue;
+import graphql.language.BooleanValue;
+import graphql.language.Document;
+import graphql.language.EnumValue;
+import graphql.language.FloatValue;
+import graphql.language.InputObjectTypeDefinition;
+import graphql.language.InputValueDefinition;
+import graphql.language.IntValue;
+import graphql.language.ObjectField;
+import graphql.language.ObjectValue;
+import graphql.language.StringValue;
+import graphql.language.Value;
 import graphql.parser.Parser;
-import graphql.schema.*;
+import graphql.schema.GraphQLEnumType;
+import graphql.schema.GraphQLInputObjectField;
+import graphql.schema.GraphQLInputObjectType;
+import graphql.schema.GraphQLInputType;
+import graphql.schema.GraphQLList;
+import graphql.schema.GraphQLNonNull;
+import graphql.schema.GraphQLScalarType;
+import graphql.schema.GraphQLType;
+import graphql.schema.GraphQLTypeReference;
 import graphql.util.FpKit;
 
 import java.beans.BeanInfo;
@@ -44,7 +67,8 @@ public class AstValueHelperEx {
    * | Mixed         | Enum Value           |
    * </pre>
    *
-   * @param value - the java value to be converted into github.io.github.graphqly.reflector.reflector ast
+   * @param value - the java value to be converted into
+   *     github.io.github.graphqly.reflector.reflector ast
    * @param type the github.io.github.graphqly.reflector.reflector type of the object
    * @return a grapql language ast {@link Value}
    */

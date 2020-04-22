@@ -49,7 +49,7 @@ public class ManifestValueMapper extends GsonValueMapper {
   }
 
   public static class DefaultInstanceResolver extends InstanceResolver {
-    private Map<Class<?>, Object> instances = new HashMap<>();
+    private final Map<Class<?>, Object> instances = new HashMap<>();
 
     public <T> DefaultInstanceResolver map(Class<T> type, T instance) {
       instances.put(type, instance);

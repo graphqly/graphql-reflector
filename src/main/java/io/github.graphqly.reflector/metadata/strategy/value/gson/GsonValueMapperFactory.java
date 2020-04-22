@@ -1,8 +1,11 @@
 package io.github.graphqly.reflector.metadata.strategy.value.gson;
 
-import com.google.gson.*;
+import com.google.gson.FieldNamingStrategy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.TypeAdapterFactory;
 import io.github.graphqly.reflector.execution.GlobalEnvironment;
-import io.leangen.geantyref.GenericTypeReflector;
 import io.github.graphqly.reflector.metadata.messages.MessageBundle;
 import io.github.graphqly.reflector.metadata.strategy.type.DefaultTypeInfoGenerator;
 import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
@@ -10,10 +13,15 @@ import io.github.graphqly.reflector.metadata.strategy.value.ScalarDeserializatio
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapperFactory;
 import io.github.graphqly.reflector.util.ClassUtils;
+import io.leangen.geantyref.GenericTypeReflector;
 import net.dongliu.gson.GsonJava8TypeAdapterFactory;
 
 import java.lang.reflect.AnnotatedType;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /** @author Bojan Tomic (kaqqao) */
 public class GsonValueMapperFactory implements ValueMapperFactory, ScalarDeserializationStrategy {
@@ -174,7 +182,7 @@ public class GsonValueMapperFactory implements ValueMapperFactory, ScalarDeseria
     private Gson prototype;
     private FieldNamingStrategy fieldNamingStrategy;
     private TypeInfoGenerator typeInfoGenerator = new DefaultTypeInfoGenerator();
-    private List<Configurer> configurers =
+    private final List<Configurer> configurers =
         new ArrayList<>(Collections.singleton(new AbstractClassAdapterConfigurer()));
 
     public Builder withFieldNamingStrategy(FieldNamingStrategy fieldNamingStrategy) {

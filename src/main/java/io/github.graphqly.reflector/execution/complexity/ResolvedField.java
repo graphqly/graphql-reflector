@@ -19,7 +19,7 @@ public class ResolvedField {
   private final Map<String, Object> arguments;
   private final Resolver resolver;
 
-  private Map<String, ResolvedField> children;
+  private final Map<String, ResolvedField> children;
   private int complexityScore;
 
   public ResolvedField(

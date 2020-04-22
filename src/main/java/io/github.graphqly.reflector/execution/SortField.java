@@ -3,8 +3,8 @@ package io.github.graphqly.reflector.execution;
 /** Created by bojan.tomic on 3/31/16. */
 public class SortField {
 
-  private String name;
-  private Direction direction;
+  private final String name;
+  private final Direction direction;
 
   public SortField(String name, Direction direction) {
     this.name = name;

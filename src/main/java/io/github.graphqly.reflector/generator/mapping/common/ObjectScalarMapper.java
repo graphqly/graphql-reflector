@@ -2,11 +2,11 @@ package io.github.graphqly.reflector.generator.mapping.common;
 
 import graphql.schema.GraphQLDirective;
 import graphql.schema.GraphQLScalarType;
+import io.github.graphqly.reflector.annotations.GraphQLScalar;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.generator.OperationMapper;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.util.Scalars;
-import io.github.graphqly.reflector.annotations.GraphQLScalar;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedType;

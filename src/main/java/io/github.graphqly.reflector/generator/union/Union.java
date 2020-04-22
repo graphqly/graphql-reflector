@@ -22,8 +22,8 @@ import static java.util.Arrays.stream;
 public abstract class Union {
 
   private static final String SINGLE_TYPE_UNION_ERROR = "Unions of a single type are not allowed";
-  private String name;
-  private String description;
+  private final String name;
+  private final String description;
   private List<AnnotatedType> javaTypes;
 
   public Union(String name, String description, List<AnnotatedType> javaTypes) {

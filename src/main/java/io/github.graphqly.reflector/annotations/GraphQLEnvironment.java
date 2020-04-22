@@ -18,11 +18,8 @@ import java.lang.annotation.Target;
  *       being resolved
  *   <li>{@code List<Field>} - Injects all the AST {@link graphql.language.Field}s on the current
  *       level
- *   <li>{@link ValueMapper} - Injects a {@link
- *       ValueMapper} appropriate for the current
- *       resolver
- *   <li>{@link ResolutionEnvironment} - Injects the entire {@link
- *       ResolutionEnvironment}
+ *   <li>{@link ValueMapper} - Injects a {@link ValueMapper} appropriate for the current resolver
+ *   <li>{@link ResolutionEnvironment} - Injects the entire {@link ResolutionEnvironment}
  * </ol>
  */
 @GraphQLIgnore

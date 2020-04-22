@@ -2,16 +2,47 @@ package io.github.graphqly.reflector.utils.printer;
 
 import graphql.Assert;
 import graphql.PublicApi;
-import graphql.language.*;
+import graphql.language.Comment;
+import graphql.language.Description;
+import graphql.language.Document;
+import graphql.language.Node;
+import graphql.language.Value;
 import graphql.scalars.object.ObjectScalar;
-import graphql.schema.*;
-import graphql.schema.idl.*;
+import graphql.schema.GraphQLArgument;
+import graphql.schema.GraphQLDirective;
+import graphql.schema.GraphQLEnumType;
+import graphql.schema.GraphQLEnumValueDefinition;
+import graphql.schema.GraphQLFieldDefinition;
+import graphql.schema.GraphQLInputObjectField;
+import graphql.schema.GraphQLInputObjectType;
+import graphql.schema.GraphQLInputType;
+import graphql.schema.GraphQLInterfaceType;
+import graphql.schema.GraphQLObjectType;
+import graphql.schema.GraphQLOutputType;
+import graphql.schema.GraphQLScalarType;
+import graphql.schema.GraphQLSchema;
+import graphql.schema.GraphQLType;
+import graphql.schema.GraphQLTypeUtil;
+import graphql.schema.GraphQLUnionType;
+import graphql.schema.idl.DefaultSchemaPrinterComparatorRegistry;
+import graphql.schema.idl.ScalarInfo;
+import graphql.schema.idl.SchemaParser;
+import graphql.schema.idl.SchemaPrinterComparatorEnvironment;
+import graphql.schema.idl.SchemaPrinterComparatorRegistry;
+import graphql.schema.idl.TypeDefinitionRegistry;
+import graphql.schema.idl.UnExecutableSchemaGenerator;
 import graphql.schema.visibility.GraphqlFieldVisibility;
 import io.github.graphqly.reflector.generator.OperationMapper;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.StringWriter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -19,7 +50,8 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 /**
- * SchemaPrinter A custom version from github.io.github.graphqly.reflector.reflector-java SchemaPrinter
+ * SchemaPrinter A custom version from github.io.github.graphqly.reflector.reflector-java
+ * SchemaPrinter
  *
  * <p>This can print an in memory GraphQL schema back to a logical schema definition
  */
@@ -688,7 +720,7 @@ public class SchemaPrinter {
 
     private boolean includeDirectives;
 
-    private Set<String> ignoredDirectives = new HashSet<>();
+    private final Set<String> ignoredDirectives = new HashSet<>();
 
     private SchemaPrinterComparatorRegistry comparatorRegistry;
 
@@ -760,8 +792,9 @@ public class SchemaPrinter {
     }
 
     /**
-     * This will allow you to include the github.io.github.graphqly.reflector.reflector 'extended' scalar types that come with
-     * github.io.github.graphqly.reflector.reflector-java such as GraphQLBigDecimal or GraphQLBigInteger
+     * This will allow you to include the github.io.github.graphqly.reflector.reflector 'extended'
+     * scalar types that come with github.io.github.graphqly.reflector.reflector-java such as
+     * GraphQLBigDecimal or GraphQLBigInteger
      *
      * @param flag whether to include them
      * @return options
@@ -772,10 +805,11 @@ public class SchemaPrinter {
     }
 
     /**
-     * This will force the printing of the github.io.github.graphqly.reflector.reflector schema definition even if the query, mutation,
-     * and/or subscription types use the default names. Some github.io.github.graphqly.reflector.reflector parsers require this
-     * information even if the schema uses the default type names. The schema definition will always
-     * be printed if any of the query, mutation, or subscription types do not use the default names.
+     * This will force the printing of the github.io.github.graphqly.reflector.reflector schema
+     * definition even if the query, mutation, and/or subscription types use the default names. Some
+     * github.io.github.graphqly.reflector.reflector parsers require this information even if the
+     * schema uses the default type names. The schema definition will always be printed if any of
+     * the query, mutation, or subscription types do not use the default names.
      *
      * @param flag whether to force include the schema definition
      * @return options

@@ -1,17 +1,29 @@
 package io.github.graphqly.reflector.generator.mapping.strategy;
 
+import io.github.classgraph.ClassInfo;
 import io.github.graphqly.reflector.generator.BuildContext;
 import io.github.graphqly.reflector.metadata.exceptions.TypeMappingException;
 import io.github.graphqly.reflector.metadata.strategy.value.InputFieldBuilderParams;
 import io.github.graphqly.reflector.util.ClassFinder;
 import io.github.graphqly.reflector.util.ClassUtils;
 import io.github.graphqly.reflector.util.Scalars;
-import io.github.classgraph.ClassInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.AnnotatedArrayType;
+import java.lang.reflect.AnnotatedParameterizedType;
+import java.lang.reflect.AnnotatedType;
+import java.lang.reflect.AnnotatedTypeVariable;
+import java.lang.reflect.AnnotatedWildcardType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -54,7 +66,9 @@ public class AutoScanAbstractInputHandler implements AbstractInputHandler {
   @Override
   public List<Class<?>> findConcreteSubTypes(Class abstractType, BuildContext buildContext) {
     Predicate<ClassInfo> filter =
-        ClassFinder.CONCRETE.and(ClassFinder.NON_IGNORED).and(filters.stream().reduce(Predicate::and).orElse(ClassFinder.ALL));
+        ClassFinder.CONCRETE
+            .and(ClassFinder.NON_IGNORED)
+            .and(filters.stream().reduce(Predicate::and).orElse(ClassFinder.ALL));
     List<Class<?>> subTypes =
         buildContext.classFinder.findImplementations(
             abstractType, filter, buildContext.basePackages);

@@ -2,18 +2,70 @@ package io.github.graphqly.reflector.utils.printer;
 
 import graphql.AssertException;
 import graphql.PublicApi;
-import graphql.language.*;
+import graphql.language.Argument;
+import graphql.language.ArrayValue;
+import graphql.language.BooleanValue;
+import graphql.language.Comment;
+import graphql.language.Directive;
+import graphql.language.DirectiveDefinition;
+import graphql.language.DirectiveLocation;
+import graphql.language.Document;
+import graphql.language.EnumTypeDefinition;
+import graphql.language.EnumTypeExtensionDefinition;
+import graphql.language.EnumValue;
+import graphql.language.EnumValueDefinition;
+import graphql.language.Field;
+import graphql.language.FieldDefinition;
+import graphql.language.FloatValue;
+import graphql.language.FragmentDefinition;
+import graphql.language.FragmentSpread;
+import graphql.language.InlineFragment;
+import graphql.language.InputObjectTypeDefinition;
+import graphql.language.InputObjectTypeExtensionDefinition;
+import graphql.language.InputValueDefinition;
+import graphql.language.IntValue;
+import graphql.language.InterfaceTypeDefinition;
+import graphql.language.InterfaceTypeExtensionDefinition;
+import graphql.language.ListType;
+import graphql.language.Node;
+import graphql.language.NonNullType;
+import graphql.language.NullValue;
+import graphql.language.ObjectField;
+import graphql.language.ObjectTypeDefinition;
+import graphql.language.ObjectTypeExtensionDefinition;
+import graphql.language.ObjectValue;
+import graphql.language.OperationDefinition;
+import graphql.language.OperationTypeDefinition;
+import graphql.language.ScalarTypeDefinition;
+import graphql.language.ScalarTypeExtensionDefinition;
+import graphql.language.SchemaDefinition;
+import graphql.language.SelectionSet;
+import graphql.language.StringValue;
+import graphql.language.Type;
+import graphql.language.TypeName;
+import graphql.language.UnionTypeDefinition;
+import graphql.language.UnionTypeExtensionDefinition;
+import graphql.language.Value;
+import graphql.language.VariableDefinition;
+import graphql.language.VariableReference;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static graphql.Assert.assertTrue;
 import static java.lang.String.valueOf;
 import static java.util.stream.Collectors.joining;
 
-/** This can take github.io.github.graphqly.reflector.reflector language AST and print it out as a string */
+/**
+ * This can take github.io.github.graphqly.reflector.reflector language AST and print it out as a
+ * string
+ */
 @SuppressWarnings("UnnecessaryLocalVariable")
 @PublicApi
 public class AstPrinter {
@@ -70,7 +122,8 @@ public class AstPrinter {
   }
 
   /**
-   * This will pretty print the AST node in github.io.github.graphqly.reflector.reflector language format
+   * This will pretty print the AST node in github.io.github.graphqly.reflector.reflector language
+   * format
    *
    * @param node the AST node to print
    * @return the printed node in github.io.github.graphqly.reflector.reflector language format
@@ -82,7 +135,8 @@ public class AstPrinter {
   }
 
   /**
-   * This will pretty print the AST node in github.io.github.graphqly.reflector.reflector language format
+   * This will pretty print the AST node in github.io.github.graphqly.reflector.reflector language
+   * format
    *
    * @param writer the place to put the output
    * @param node the AST node to print
@@ -92,11 +146,12 @@ public class AstPrinter {
   }
 
   /**
-   * This will print the Ast node in github.io.github.graphqly.reflector.reflector language format in a compact manner, with no new lines
-   * and comments stripped out of the text.
+   * This will print the Ast node in github.io.github.graphqly.reflector.reflector language format
+   * in a compact manner, with no new lines and comments stripped out of the text.
    *
    * @param node the AST node to print
-   * @return the printed node in a compact github.io.github.graphqly.reflector.reflector language format
+   * @return the printed node in a compact github.io.github.graphqly.reflector.reflector language
+   *     format
    */
   public static String printAstCompact(Node node) {
     StringWriter sw = new StringWriter();

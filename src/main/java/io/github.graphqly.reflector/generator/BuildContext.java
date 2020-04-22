@@ -8,27 +8,32 @@ import graphql.schema.TypeResolver;
 import io.github.graphqly.reflector.execution.GlobalEnvironment;
 import io.github.graphqly.reflector.execution.ResolverInterceptorFactory;
 import io.github.graphqly.reflector.generator.mapping.SchemaTransformer;
+import io.github.graphqly.reflector.generator.mapping.SchemaTransformerRegistry;
 import io.github.graphqly.reflector.generator.mapping.TypeMapper;
+import io.github.graphqly.reflector.generator.mapping.TypeMapperRegistry;
+import io.github.graphqly.reflector.generator.mapping.strategy.AbstractInputHandler;
+import io.github.graphqly.reflector.generator.mapping.strategy.ImplementationDiscoveryStrategy;
+import io.github.graphqly.reflector.generator.mapping.strategy.InterfaceMappingStrategy;
 import io.github.graphqly.reflector.metadata.messages.MessageBundle;
 import io.github.graphqly.reflector.metadata.strategy.InclusionStrategy;
 import io.github.graphqly.reflector.metadata.strategy.query.DirectiveBuilder;
 import io.github.graphqly.reflector.metadata.strategy.query.DirectiveBuilderParams;
+import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
 import io.github.graphqly.reflector.metadata.strategy.type.TypeTransformer;
 import io.github.graphqly.reflector.metadata.strategy.value.ScalarDeserializationStrategy;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
 import io.github.graphqly.reflector.metadata.strategy.value.ValueMapperFactory;
 import io.github.graphqly.reflector.util.ClassFinder;
 import io.github.graphqly.reflector.util.ClassUtils;
-import io.github.graphqly.reflector.generator.mapping.SchemaTransformerRegistry;
-import io.github.graphqly.reflector.generator.mapping.TypeMapperRegistry;
-import io.github.graphqly.reflector.generator.mapping.strategy.AbstractInputHandler;
-import io.github.graphqly.reflector.generator.mapping.strategy.ImplementationDiscoveryStrategy;
-import io.github.graphqly.reflector.generator.mapping.strategy.InterfaceMappingStrategy;
-import io.github.graphqly.reflector.metadata.strategy.type.TypeInfoGenerator;
 import io.github.graphqly.reflector.util.GraphQLUtils;
 
 import java.lang.reflect.AnnotatedType;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -74,10 +79,8 @@ public class BuildContext {
    * @param environment The globally shared environment
    * @param operationRegistry Repository that can be used to fetch all known (singleton and domain)
    *     queries
-   * @param typeMappers Repository of all registered {@link
-   *     TypeMapper}s
-   * @param transformers Repository of all registered {@link
-   *     SchemaTransformer}s
+   * @param typeMappers Repository of all registered {@link TypeMapper}s
+   * @param transformers Repository of all registered {@link SchemaTransformer}s
    * @param valueMapperFactory The factory used to produce {@link ValueMapper} instances
    * @param typeInfoGenerator Generates type name/description
    * @param messageBundle The global translation message bundle

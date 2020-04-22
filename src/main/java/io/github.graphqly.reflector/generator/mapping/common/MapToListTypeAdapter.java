@@ -1,18 +1,24 @@
 package io.github.graphqly.reflector.generator.mapping.common;
 
-import graphql.schema.*;
+import graphql.schema.GraphQLInputType;
+import graphql.schema.GraphQLList;
+import graphql.schema.GraphQLModifiedType;
+import graphql.schema.GraphQLNonNull;
+import graphql.schema.GraphQLOutputType;
+import graphql.schema.GraphQLType;
+import graphql.schema.GraphQLTypeReference;
+import io.github.graphqly.reflector.annotations.GraphQLScalar;
 import io.github.graphqly.reflector.execution.GlobalEnvironment;
 import io.github.graphqly.reflector.execution.ResolutionEnvironment;
 import io.github.graphqly.reflector.generator.BuildContext;
-import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
-import io.github.graphqly.reflector.util.ClassUtils;
-import io.leangen.geantyref.GenericTypeReflector;
-import io.leangen.geantyref.TypeFactory;
-import io.github.graphqly.reflector.annotations.GraphQLScalar;
 import io.github.graphqly.reflector.generator.OperationMapper;
 import io.github.graphqly.reflector.generator.mapping.AbstractTypeAdapter;
 import io.github.graphqly.reflector.generator.mapping.DelegatingOutputConverter;
 import io.github.graphqly.reflector.generator.mapping.TypeMapper;
+import io.github.graphqly.reflector.metadata.strategy.value.ValueMapper;
+import io.github.graphqly.reflector.util.ClassUtils;
+import io.leangen.geantyref.GenericTypeReflector;
+import io.leangen.geantyref.TypeFactory;
 
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Type;

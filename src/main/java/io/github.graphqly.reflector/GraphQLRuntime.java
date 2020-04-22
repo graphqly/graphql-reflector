@@ -44,8 +44,8 @@ public class GraphQLRuntime extends GraphQL {
 
   public static class Builder extends GraphQL.Builder {
 
-    private GraphQLSchema graphQLSchema;
-    private List<Instrumentation> instrumentations;
+    private final GraphQLSchema graphQLSchema;
+    private final List<Instrumentation> instrumentations;
 
     private Builder(GraphQLSchema graphQLSchema) {
       super(graphQLSchema);

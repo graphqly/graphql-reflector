@@ -25,8 +25,7 @@ public class StructTest {
         json(
             key("name").value(APP_NAME),
             key("version").value("0.1.0"),
-            key("maintainer").value("Andy Le, anhld2@vng.com.vn")
-        );
+            key("maintainer").value("Andy Le, anhld2@vng.com.vn"));
     assert data.getAsJsonPrimitive("name").getAsString().equals(APP_NAME);
 
     Race human = struct(Race.class, key("longevity").value(90).asJson());

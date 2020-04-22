@@ -9,8 +9,8 @@ import java.util.List;
 /** Created by bojan.tomic on 5/16/16. */
 public class GenericPage<N> implements Page<N> {
 
-  private List<Edge<N>> edges;
-  private PageInfo pageInfo;
+  private final List<Edge<N>> edges;
+  private final PageInfo pageInfo;
 
   @SuppressWarnings("WeakerAccess")
   public GenericPage(List<Edge<N>> edges, PageInfo pageInfo) {

@@ -1,9 +1,9 @@
 package io.github.graphqly.reflector.metadata.strategy.value;
 
-import io.leangen.geantyref.GenericTypeReflector;
 import io.github.graphqly.reflector.metadata.InputField;
 import io.github.graphqly.reflector.metadata.TypedElement;
 import io.github.graphqly.reflector.util.ClassUtils;
+import io.leangen.geantyref.GenericTypeReflector;
 
 import java.lang.reflect.AnnotatedType;
 import java.util.Set;
