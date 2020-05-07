@@ -6,10 +6,33 @@
 
     <groupId>io.github.graphqly</groupId>
     <artifactId>graphql-reflector</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <properties>
         <jdk.version>1.8</jdk.version>
     </properties>
+
+    <name>GraphQL Reflector</name>
+    <description>A simple GraphQL reflection library for Java code-first applications</description>
+    <url>https://github.com/graphqly/graphql-reflector</url>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Andy Le</name>
+            <email>anhldbk@gmail.com</email>
+            <organization>BigSonata</organization>
+            <organizationUrl>https://bigsonata.com/</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/graphqly/graphql-reflector.git</connection>
+        <developerConnection>scm:git:ssh://github.com:graphqly/graphql-reflector.git</developerConnection>
+        <url>https://github.com/graphqly/graphql-reflector/tree/master</url>
+    </scm>
 
     <build>
         <plugins>
@@ -67,17 +90,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
             </plugin>
         </plugins>
     </build>
